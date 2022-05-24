@@ -25,7 +25,8 @@ class BroadcastablePoints(Points):
             for b in broadcast_dims:
                 # need to loop so because doing all at once means that larger
                 # values for dim will be placed in the wrong spot
-                data = np.insert(data, b, -np.ones(data.shape[0]), axis=1)
+                # data = np.insert(data, b, -np.ones(data.shape[0]), axis=1)
+                data = np.insert(data, b, 0, axis=1)
 
         super().__init__(data, ndim=ndim, **kwargs)
 
