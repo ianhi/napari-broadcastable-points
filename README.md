@@ -1,13 +1,16 @@
 # napari-broadcastable-points
 
+[![License](https://img.shields.io/pypi/l/napari-broadcastable-points.svg?color=green)](https://github.com/ianhi/napari-broadcastable-points/raw/main/LICENSE)
+[![PyPI](https://img.shields.io/pypi/v/napari-broadcastable-points.svg?color=green)](https://pypi.org/project/napari-broadcastable-points)
+[![Python Version](https://img.shields.io/pypi/pyversions/napari-broadcastable-points.svg?color=green)](https://python.org)
 
 Points layer that can broadcast over arbitrary dimensions. Available here as a workaround until something more complete is implemented in napari core (https://github.com/napari/napari/issues/2343).
 
-Warning! This is likely to be very brittle for all the reasons discussed in the napari issue - so while it is useful it should also be used wiht caution. So don't muck around much with the viewer dims after creating, because who knows what will happen.
+**Warning!** This is likely to be very brittle for all the reasons discussed in the napari issue - so while it is useful it should also be used with caution. So don't muck around much with the viewer dims after creating, because who knows what will happen.
 
 ### Installation
 ```bash
-pip install git+https://github.com/ianhi/napari-broadcastable-points
+pip install napari-broadcastable-points
 ```
 
 
@@ -62,8 +65,5 @@ points = BroadcastablePoints(None, broadcast_dims = (2, 3), ndim=6)
 
 
 
-<!-- [![License](https://img.shields.io/pypi/l/napari-broadcastable-points.svg?color=green)](https://github.com/ianhi/napari-broadcastable-points/raw/main/LICENSE) -->
-<!-- [![PyPI](https://img.shields.io/pypi/v/napari-broadcastable-points.svg?color=green)](https://pypi.org/project/napari-broadcastable-points) -->
-<!-- [![Python Version](https://img.shields.io/pypi/pyversions/napari-broadcastable-points.svg?color=green)](https://python.org) -->
 <!-- [![CI](https://github.com/ianhi/napari-broadcastable-points/actions/workflows/ci/badge.svg)](https://github.com/ianhi/napari-broadcastable-points/actions) -->
 <!-- [![codecov](https://codecov.io/gh/ianhi/napari-broadcastable-points/branch/master/graph/badge.svg)](https://codecov.io/gh/ianhi/napari-broadcastable-points) -->
