@@ -19,7 +19,7 @@ Here is an example where we have an  image sequence of (TPCZYX) and we broadcast
 
 ```python
 import napari
-from points import BroadcastablePoints
+from napari_broadcastable_points import BroadcastablePoints
 import numpy as np
 
 v = napari.Viewer()
@@ -50,6 +50,7 @@ v.dims.axis_labels = ('T', 'P', 'C', 'Z', 'Y', 'X')
 
 points = BroadcastablePoints(dat, broadcast_dims = (2, 3))
 v.add_layer(points)
+napari.run()
 ```
 
 ![example usage](images/points-broadcasting.gif)
