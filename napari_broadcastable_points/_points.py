@@ -30,6 +30,17 @@ class BroadcastablePoints(Points):
 
         super().__init__(data, ndim=ndim, **kwargs)
 
+    def last_displayed(self) -> np.ndarray:
+        """
+        Return the XY coordinates of the most recently displayed points
+
+        Returns
+        -------
+        data : (N, 2)
+            The xy coordinates of the most recently displayed points.
+        """
+        return self.data[self._last_displayed_indices][:, -2:]
+
     def _slice_data(self, dims_indices) -> Tuple[List[int], Union[float, np.ndarray]]:
         """Determines the slice of points given the indices.
         Parameters
@@ -59,12 +70,16 @@ class BroadcastablePoints(Points):
 
         if len(self.data) > 0:
             if self.out_of_slice_display is True and self.ndim > 2:
-                return super()._slice_data(dims_indices)
+
+                slice_indices, scale = super()._slice_data(dims_indices)
             else:
                 data = self.data[:, not_disp]
                 distances = np.abs(data - indices[not_disp])
                 matches = np.all(distances <= 0.5, axis=1)
                 slice_indices = np.where(matches)[0].astype(int)
-                return slice_indices, 1
+                scale = 1
         else:
-            return [], np.empty(0)
+            slice_indices = []
+            scale = np.empty(0)
+        self._last_displayed_indices = slice_indices
+        return slice_indices, scale
