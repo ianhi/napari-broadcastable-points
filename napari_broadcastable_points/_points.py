@@ -1,7 +1,10 @@
+from __future__ import annotations
 from typing import List, Tuple, Union
 
 import numpy as np
 from napari.layers import Points
+from napari_broadcastable_points._slice import _PointSliceRequest
+from napari.layers.utils._slice_input import _SliceInput
 
 __all__ = [
     "BroadcastablePoints",
@@ -39,47 +42,17 @@ class BroadcastablePoints(Points):
         data : (N, 2)
             The xy coordinates of the most recently displayed points.
         """
-        return self.data[self._last_displayed_indices][:, -2:]
+        return self._view_data
 
-    def _slice_data(self, dims_indices) -> Tuple[List[int], Union[float, np.ndarray]]:
-        """Determines the slice of points given the indices.
-        Parameters
-        ----------
-        dims_indices : sequence of int or slice
-            Indices to slice with.
-
-        Returns
-        -------
-        slice_indices : list
-            Indices of points in the currently viewed slice.
-        scale : float, (N, ) array
-            If in `out_of_slice_display` mode then the scale factor of points, where
-            values of 1 corresponds to points located in the slice, and values
-            less than 1 correspond to points located in neighboring slices.
-        """
-        # Get a list of the data for the points in this slice
-        not_disp = list(self._dims_not_displayed)
-
-        # ignore any dims we are broadcasting over
-        for dim in self._broadcast_dims:
-            if dim in not_disp:
-                # if check to avoid errors when empty
-                not_disp.remove(dim)
-
-        indices = np.array(dims_indices)
-
-        if len(self.data) > 0:
-            if self.out_of_slice_display is True and self.ndim > 2:
-
-                slice_indices, scale = super()._slice_data(dims_indices)
-            else:
-                data = self.data[:, not_disp]
-                distances = np.abs(data - indices[not_disp])
-                matches = np.all(distances <= 0.5, axis=1)
-                slice_indices = np.where(matches)[0].astype(int)
-                scale = 1
-        else:
-            slice_indices = []
-            scale = np.empty(0)
-        self._last_displayed_indices = slice_indices
-        return slice_indices, scale
+    def _make_slice_request_internal(
+        self, slice_input: _SliceInput, dims_indices
+    ):
+        self._lastResponse =  _PointSliceRequest(
+            dims=slice_input,
+            broadcast_dims=self._broadcast_dims,
+            data=self.data,
+            dims_indices=dims_indices,
+            out_of_slice_display=self.out_of_slice_display,
+            size=self.size,
+        )
+        return self._lastResponse
