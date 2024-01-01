@@ -1,10 +1,12 @@
 from __future__ import annotations
-from typing import List, Tuple, Union
+
+from typing import List
 
 import numpy as np
 from napari.layers import Points
-from napari_broadcastable_points._slice import _PointSliceRequest
 from napari.layers.utils._slice_input import _SliceInput
+
+from napari_broadcastable_points._slice import _PointSliceRequest
 
 __all__ = [
     "BroadcastablePoints",
@@ -44,10 +46,8 @@ class BroadcastablePoints(Points):
         """
         return self._view_data
 
-    def _make_slice_request_internal(
-        self, slice_input: _SliceInput, dims_indices
-    ):
-        self._lastResponse =  _PointSliceRequest(
+    def _make_slice_request_internal(self, slice_input: _SliceInput, dims_indices):
+        self._lastResponse = _PointSliceRequest(
             dims=slice_input,
             broadcast_dims=self._broadcast_dims,
             data=self.data,
