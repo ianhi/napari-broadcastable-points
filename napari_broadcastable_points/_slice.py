@@ -2,7 +2,6 @@ from dataclasses import dataclass, field
 from typing import Any
 
 import numpy as np
-
 from napari.layers.base._slice import _next_request_id
 from napari.layers.utils._slice_input import _SliceInput
 
@@ -101,9 +100,7 @@ class _PointSliceRequest:
                 not_disp, not_disp_indices
             )
         else:
-            slice_indices, scale = self._get_slice_data(
-                not_disp, not_disp_indices
-            )
+            slice_indices, scale = self._get_slice_data(not_disp, not_disp_indices)
 
         return _PointSliceResponse(
             indices=slice_indices,
