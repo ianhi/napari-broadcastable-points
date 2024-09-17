@@ -24,12 +24,6 @@ repos:
       - id: ruff
         args: [--fix]
 
-  - repo: https://github.com/crate-ci/typos
-    rev: v1.16.10
-    hooks:
-      - id: typos
-
-
   - repo: https://github.com/abravalheri/validate-pyproject
     rev: v0.14
     hooks:

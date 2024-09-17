@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, List, Tuple, Union
 import numpy as np
 from napari.layers import Points
 
-from ._slice import _PointSliceRequest, _ThickANDSlice
+from ._slice import _PointSliceRequest, _ThickNDSlice
 
 if TYPE_CHECKING:
     from napari.layers.utils._slice_input import _SliceInput
@@ -63,7 +63,7 @@ class BroadcastablePoints(Points):
         return self._lastResponse
 
     def _make_slice_request_internal(
-        self, slice_input: _SliceInput, data_slice: _ThickANDSlice
+        self, slice_input: _SliceInput, data_slice: _ThickNDSlice
     ) -> _PointSliceRequest:
         self._lastResponse = _PointSliceRequest(
             slice_input=slice_input,
