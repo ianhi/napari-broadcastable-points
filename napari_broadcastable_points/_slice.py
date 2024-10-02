@@ -1,11 +1,16 @@
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Iterable
 
 import numpy as np
 import numpy.typing as npt
 from napari.layers.base._slice import _next_request_id
 from napari.layers.points._points_constants import PointsProjectionMode
 from napari.layers.utils._slice_input import _SliceInput, _ThickNDSlice
+
+__all__ = [
+    "_PointSliceRequest",
+    "_PointSliceResponse",
+]
 
 
 @dataclass(frozen=True)
@@ -56,6 +61,7 @@ class _PointSliceRequest:
         See the corresponding attributes in `Layer` and `Points`.
     """
 
+    broadcast_dims: Iterable[int]
     slice_input: _SliceInput
     data: Any = field(repr=False)
     data_slice: _ThickNDSlice = field(repr=False)
@@ -75,6 +81,16 @@ class _PointSliceRequest:
             )
 
         not_disp = list(self.slice_input.not_displayed)
+        ############################################################
+        # start patch
+        # ignore any dims we are broadcasting over
+        for dim in self.broadcast_dims:
+            if dim in not_disp:
+                # if check to avoid errors when empty
+                not_disp.remove(dim)
+        # end patch
+        ############################################################
+
         if not not_disp:
             # If we want to display everything, then use all indices.
             # scale is only impacted by not displayed data, therefore 1
@@ -84,7 +100,6 @@ class _PointSliceRequest:
                 slice_input=self.slice_input,
                 request_id=self.id,
             )
-
         slice_indices, scale = self._get_slice_data(not_disp)
 
         return _PointSliceResponse(
