@@ -101,4 +101,8 @@ source = "vcs"
 allow-direct-references = true
 
 [dependency-groups]
-dev = ["pyqt5>=5.15.0", "pytest>=8.3.5"]
+dev = [
+    "pyqt5>=5.15.0",
+ "pytest>=8.3.5",
+ "pytest-cov>=6.1.1",
+]
