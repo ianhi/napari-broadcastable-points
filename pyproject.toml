@@ -27,7 +27,7 @@ classifiers = [
   "Topic :: Utilities",
 ]
 dynamic = ["version"]
-dependencies = ["napari>=0.6.3rc1"]
+dependencies = ["napari>=0.6.0"]
 
 [project.urls]
 Homepage = "https://github.com/ianhi/napari-broadcastable-points#napari-broadcastable-points"
@@ -78,10 +78,7 @@ add_select = ["D402", "D415", "D417"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = [
-  "--doctest-continue-on-failure",
-  "--doctest-modules",
-]
+addopts = ["--doctest-continue-on-failure", "--doctest-modules"]
 
 [tool.mypy]
 files = "napari_broadcastable_points"
@@ -104,7 +101,4 @@ source = "vcs"
 allow-direct-references = true
 
 [dependency-groups]
-dev = [
-    "pyqt5>=5.15.0",
-    "pytest>=8.3.5",
-]
+dev = ["pyqt5>=5.15.0", "pytest>=8.3.5"]
