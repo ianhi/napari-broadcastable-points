@@ -27,7 +27,7 @@ classifiers = [
   "Topic :: Utilities",
 ]
 dynamic = ["version"]
-dependencies = ["napari>=0.6.0"]
+dependencies = ["napari==0.5.0"]
 
 [project.urls]
 Homepage = "https://github.com/ianhi/napari-broadcastable-points#napari-broadcastable-points"
