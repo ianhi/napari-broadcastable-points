@@ -1,13 +1,11 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, List
-from dataclasses import dataclass, field
 
 import numpy as np
 from napari.layers import Points
 from napari.layers.points._slice import _PointSliceRequest, _PointSliceResponse
 from napari.layers.utils._slice_input import _ThickNDSlice
-from napari.layers.base._slice import _next_request_id
 
 if TYPE_CHECKING:
     from napari.layers.utils._slice_input import _SliceInput
@@ -19,12 +17,12 @@ __all__ = [
 
 class BroadcastablePointSliceRequest(_PointSliceRequest):
     """Extended _PointSliceRequest that handles broadcast dimensions."""
-    
+
     def __init__(self, broadcast_dims, **kwargs):
         self.broadcast_dims = broadcast_dims
         # Pass all other arguments to parent
         super().__init__(**kwargs)
-    
+
     def __call__(self) -> _PointSliceResponse:
         # Return early if no data
         if len(self.data) == 0:
@@ -36,12 +34,12 @@ class BroadcastablePointSliceRequest(_PointSliceRequest):
             )
 
         not_disp = list(self.slice_input.not_displayed)
-        
+
         # Remove broadcast dimensions from not_displayed
         for dim in self.broadcast_dims:
             if dim in not_disp:
                 not_disp.remove(dim)
-        
+
         if not not_disp:
             # If we want to display everything, then use all indices.
             return _PointSliceResponse(
@@ -50,10 +48,10 @@ class BroadcastablePointSliceRequest(_PointSliceRequest):
                 slice_input=self.slice_input,
                 request_id=self.id,
             )
-        
+
         # Call parent's _get_slice_data with modified not_disp
         slice_indices, scale = self._get_slice_data(not_disp)
-        
+
         return _PointSliceResponse(
             indices=slice_indices,
             scale=scale,

@@ -129,7 +129,7 @@ napari.run()
 ### Debugging Slicing Behavior
 
 To understand how slicing works, check:
-1. What dimensions are in `not_displayed` 
+1. What dimensions are in `not_displayed`
 2. Which dimensions get removed by broadcast logic
 3. What points match the remaining filter criteria
 
