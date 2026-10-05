@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING
 
 import numpy as np
 from napari.layers import Points
@@ -62,7 +62,7 @@ class BroadcastablePointSliceRequest(_PointSliceRequest):
 
 class BroadcastablePoints(Points):
     def __init__(
-        self, data=None, *, ndim=None, broadcast_dims: List[int] = None, **kwargs
+        self, data=None, *, ndim=None, broadcast_dims: list[int] = None, **kwargs
     ):
         """
         Parameters
