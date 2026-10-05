@@ -1,6 +1,7 @@
 import napari
-from napari_broadcastable_points import BroadcastablePoints
 import numpy as np
+
+from napari_broadcastable_points import BroadcastablePoints
 
 v = napari.Viewer()
 

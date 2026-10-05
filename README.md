@@ -46,9 +46,9 @@ dat = np.array([
        [ 0,  1., 371.06395974, 235.12412843]])
 # fmt: on
 
-v.dims.axis_labels = ('T', 'P', 'C', 'Z', 'Y', 'X')
+v.dims.axis_labels = ("T", "P", "C", "Z", "Y", "X")
 
-points = BroadcastablePoints(dat, broadcast_dims = (2, 3))
+points = BroadcastablePoints(dat, broadcast_dims=(2, 3))
 v.add_layer(points)
 napari.run()
 ```
@@ -61,7 +61,7 @@ napari.run()
 You can also create an empty layer - but be sure to specify `ndim` otherwise you may run into an error.
 
 ```python
-points = BroadcastablePoints(None, broadcast_dims = (2, 3), ndim=6)
+points = BroadcastablePoints(None, broadcast_dims=(2, 3), ndim=6)
 ```
 
 

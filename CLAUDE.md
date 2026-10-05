@@ -116,10 +116,12 @@ images = np.zeros([T, P, C, Z, Y, X])
 v.add_image(images)
 
 # Add points that broadcast over C and Z dimensions
-dat = np.array([
-    [0, 0, 10, 10],  # T=0, P=0, Y=10, X=10
-    [0, 1, 20, 20],  # T=0, P=1, Y=20, X=20
-])
+dat = np.array(
+    [
+        [0, 0, 10, 10],  # T=0, P=0, Y=10, X=10
+        [0, 1, 20, 20],  # T=0, P=1, Y=20, X=20
+    ]
+)
 
 points = BroadcastablePoints(dat, broadcast_dims=(2, 3))
 v.add_layer(points)

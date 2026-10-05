@@ -8,8 +8,8 @@ __email__ = "ianhuntisaak@gmail.com"
 from ._points import BroadcastablePoints
 
 __all__ = [
-    "__version__",
+    "BroadcastablePoints",
     "__author__",
     "__email__",
-    "BroadcastablePoints",
+    "__version__",
 ]
